@@ -62,7 +62,7 @@ public class NotaDAL
         return nota;
     }
     public ArrayList <Nota> get(String filtro)
-    {   GeneroDAL gdal=new GeneroDAL(context);
+    {   NotaDAL gdal=new NotaDAL(context);
         ArrayList <Nota> objs = new ArrayList();
         String sql="select * from "+TABLE;
         if (!filtro.equals(""))

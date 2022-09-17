@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itNovaAnotacao"
+        android:title="Nova Anotação" />
+    <item
+        android:id="@+id/itOrdenaPrioridade"
+        android:title="Ordenar por Prioridade" />
+    <item
+        android:id="@+id/itOrdenaOrdem"
+        android:title="Ordenar por Ordem" />
+    <item
+        android:id="@+id/itFechar"
+        android:title="Fechar" />
+</menu>
