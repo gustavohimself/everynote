@@ -4,17 +4,26 @@ package com.everynote.db.bean;
 public class Nota {
 
     private int id;
-    private String texto;
+    private String texto, titulo;
     private Prioridade prioridade;
 
-    public Nota(int id, String texto, Prioridade prioridade) {
+    public Nota(int id, String titulo, String texto, Prioridade prioridade) {
         this.id = id;
+        this.titulo = titulo;
         this.texto = texto;
         this.prioridade = prioridade;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public void setId(int id) {

@@ -34,7 +34,7 @@ public class NotaDAL
     public boolean salvar(Nota nota)
     {
         ContentValues dados = new ContentValues();
-        dados.put("id", nota.getId());
+        dados.put("titulo", nota.getTitulo());
         dados.put("texto", nota.getTexto());
         dados.put("prioridade", nota.getPrioridade().getValue());
         return con.inserir(TABLE,dados)>0;
@@ -57,7 +57,7 @@ public class NotaDAL
         Nota nota = null;
         Cursor cursor=con.consultar("select * from "+TABLE+" where id="+id);
         if(cursor.moveToFirst())
-            nota = new Nota(cursor.getInt(0),cursor.getString(1), Prioridade.values()[cursor.getInt(2)]);
+            nota = new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)]);
         cursor.close();;
         return nota;
     }
@@ -71,7 +71,7 @@ public class NotaDAL
         Cursor cursor=con.consultar(sql);
         if(cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
-                objs.add(new Nota(cursor.getInt(0),cursor.getString(1), Prioridade.values()[cursor.getInt(2)]));
+                objs.add(new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)]));
                 cursor.moveToNext();
             }
         cursor.close();;

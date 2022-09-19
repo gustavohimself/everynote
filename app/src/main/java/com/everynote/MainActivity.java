@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.itOrdenaOrdem:
                 break;
             case R.id.itNovaAnotacao:
+                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);

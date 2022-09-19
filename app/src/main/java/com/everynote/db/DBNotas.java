@@ -13,7 +13,7 @@ public class DBNotas extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE notas( id INTEGER PRIMARY KEY AUTOINCREMENT, texto VARCHAR (100), prioridade INTEGER);");
+        db.execSQL("CREATE TABLE notas( id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR (100), texto VARCHAR (200), prioridade INTEGER);");
      }
 
     @Override
