@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 
 public class DBNotas extends SQLiteOpenHelper {
-    private static final int VERSAO = 1;   
+    private static final int VERSAO = 2;
     public DBNotas(Context context) {
         super(context, "notas.db", null, 1);
     }

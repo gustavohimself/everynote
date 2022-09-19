@@ -57,21 +57,25 @@ public class NotaDAL
         Nota nota = null;
         Cursor cursor=con.consultar("select * from "+TABLE+" where id="+id);
         if(cursor.moveToFirst())
-            nota = new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)]);
+            nota = new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)-1]);
         cursor.close();;
         return nota;
     }
     public ArrayList <Nota> get(String filtro)
     {   NotaDAL gdal=new NotaDAL(context);
         ArrayList <Nota> objs = new ArrayList();
-        String sql="select * from "+TABLE;
+        String sql="select * from "+TABLE + " ";
         if (!filtro.equals(""))
-            sql+=" where "+filtro;
+            sql += filtro;
 
         Cursor cursor=con.consultar(sql);
         if(cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
-                objs.add(new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)]));
+                int id = cursor.getInt(0);
+                String titulo = cursor.getString(1);
+                String texto = cursor.getString(2);
+                int prioridade = cursor.getInt(3);
+                objs.add(new Nota(cursor.getInt(0), cursor.getString(1), cursor.getString(2), Prioridade.values()[cursor.getInt(3)-1]));
                 cursor.moveToNext();
             }
         cursor.close();;

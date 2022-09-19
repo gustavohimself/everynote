@@ -48,10 +48,11 @@ public class Nota {
 
     @Override
     public String toString() {
-        return "Nota{" +
+        /*return "Nota{" +
                 "id=" + id +
                 ", texto='" + texto + '\'' +
                 ", prioridade=" + prioridade +
-                '}';
+                '}';*/
+        return this.titulo;
     }
 }
