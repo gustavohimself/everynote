@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -37,7 +38,29 @@ public class MainActivity extends AppCompatActivity {
         //NotaAdapter notaAdapter = new NotaAdapter(this, R.layout.item_listview, dados);
         NotaDAL dal = new NotaDAL(this);
         notas = dal.get("");
-        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas);
+        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+                View view = super.getView(position, convertView, parent);
+                int prioridade = MainActivity.this.notas.get(position).getPrioridade().getValue();
+
+                switch(prioridade) {
+                    case 1:
+                        view.setBackgroundResource(R.color.blue);
+                        break;
+                    case 2:
+                        view.setBackgroundResource(R.color.yellow);
+                        break;
+                    case 3:
+                        view.setBackgroundResource(R.color.red);
+                        break;
+                }
+
+                return view;
+            }
+        };
         listView.setAdapter(adapter);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
