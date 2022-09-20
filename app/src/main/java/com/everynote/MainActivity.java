@@ -38,29 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //NotaAdapter notaAdapter = new NotaAdapter(this, R.layout.item_listview, dados);
         NotaDAL dal = new NotaDAL(this);
         notas = dal.get("");
-        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-                View view = super.getView(position, convertView, parent);
-                int prioridade = MainActivity.this.notas.get(position).getPrioridade().getValue();
-
-                switch(prioridade) {
-                    case 1:
-                        view.setBackgroundResource(R.color.blue);
-                        break;
-                    case 2:
-                        view.setBackgroundResource(R.color.yellow);
-                        break;
-                    case 3:
-                        view.setBackgroundResource(R.color.red);
-                        break;
-                }
-
-                return view;
-            }
-        };
+        adapter = retornaAdapter();
         listView.setAdapter(adapter);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -121,14 +99,14 @@ public class MainActivity extends AppCompatActivity {
     {
         NotaDAL dal = new NotaDAL(MainActivity.this);
         this.notas = dal.get("order by prioridade desc");
-        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas);
+        adapter = retornaAdapter();
         this.listView.setAdapter(adapter);
     }
     public void ordenaByTitulo()
     {
         NotaDAL dal = new NotaDAL(MainActivity.this);
         this.notas = dal.get("order by titulo");
-        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas);
+        adapter = retornaAdapter();
         this.listView.setAdapter(adapter);
     }
 
@@ -137,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         NotaDAL dal = new NotaDAL(MainActivity.this);
         this.notas = dal.get("");
-        adapter = new ArrayAdapter<Nota>(this, R.layout.item_listview, notas);
+        adapter = retornaAdapter();
         this.listView.setAdapter(adapter);
     }
 
@@ -146,6 +124,32 @@ public class MainActivity extends AppCompatActivity {
         this.adapter.remove(notas.get(pos));
         this.adapter.notifyDataSetChanged();
         this.listView.invalidateViews();
+    }
+
+    public ArrayAdapter<Nota> retornaAdapter() {
+       return new ArrayAdapter<Nota>(this, R.layout.item_listview, notas) {
+           @NonNull
+           @Override
+           public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+               View view = super.getView(position, convertView, parent);
+               int prioridade = MainActivity.this.notas.get(position).getPrioridade().getValue();
+
+               switch(prioridade) {
+                   case 1:
+                       view.setBackgroundResource(R.color.blue);
+                       break;
+                   case 2:
+                       view.setBackgroundResource(R.color.yellow);
+                       break;
+                   case 3:
+                       view.setBackgroundResource(R.color.red);
+                       break;
+               }
+
+               return view;
+           }
+       };
     }
 
 }
